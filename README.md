@@ -50,7 +50,7 @@ Binary search Memory min 2397976.0 max 4564396.0
 Merge search Memory min 2397976.0 max 4564376.0
 Hash table search Memory min 17329544.0 max 18849516.0
 ```
-<center><img src="/doc/q100-10000_d200000_str.png" width="300"/></center>
+<center><img src="/doc/q100-10000_d200000_str.png" width="600"/></center>
 
 ```
 python sim.py \
@@ -60,4 +60,6 @@ python sim.py \
     --height 4 \
     --out_file ../doc/q100-10000_d200000_sim.png 
 ```
+<center><img src="/doc/q100-10000_d200000_sim.png" width="600"/></center>
+
 

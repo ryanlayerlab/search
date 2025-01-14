@@ -62,7 +62,45 @@ def get_rand_ints(N, min_v, max_v):
 
     return rand_ints
 
-def binary_search(Q, D):
+def binary_search_recursive(Q, D):
+    D.sort()
+    found = []
+    for q in Q:
+        if _binary_search_recursive(q, D, 0, len(D) - 1):
+            found.append(q)
+    return len(found)
+
+def _binary_search_recursive(q, D, low, high):
+    if low > high:
+        return False
+    mid = (low + high) // 2
+    if q == D[mid]:
+        return True
+    elif q < D[mid]:
+        return _binary_search_recursive(q, D, low, mid - 1)
+    else:
+        return _binary_search_recursive(q, D, mid + 1, high)
+
+def binary_search_iterative(Q, D):
+    D.sort()
+    found = []
+    for q in Q:
+        low = -1
+        high = len(D)
+        while (high - low) > 1:
+            mid = int((low + high)/2)
+            if Q[mid] < q:
+                low = mid
+            else:
+                high = mid
+
+        index = high
+
+        if index < len(D) and D[index] == q:
+            found.append(q)
+    return len(found)
+
+def binary_search_native(Q, D):
     D.sort()
     found = []
     for q in Q:
@@ -121,7 +159,6 @@ def main():
     if args.values_file:
         V = read_values_file(args.values_file)
 
-
     binary_search_mean_times = []
     merge_search_mean_times = []
     hash_table_search_mean_times = []
@@ -148,16 +185,14 @@ def main():
                                   args.max_value,
                                   V=V)
 
-            
-
             start = time.monotonic_ns()
-            ss_found = binary_search(Q.copy(), D.copy())
+            ss_found = binary_search_native(Q.copy(), D.copy())
             stop = time.monotonic_ns()
             binary_search_times.append(stop - start)
 
 
             tracemalloc.start()
-            ss_found = binary_search(Q.copy(), D.copy())
+            ss_found = binary_search_native(Q.copy(), D.copy())
             mem = tracemalloc.get_traced_memory()
             binary_search_mems.append(mem[1] - mem[0])
             tracemalloc.stop()

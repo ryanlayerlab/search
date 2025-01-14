@@ -139,6 +139,14 @@ def hash_table(Q, D):
             found.append(q)
     return len(found)
 
+def linear_search(Q, D):
+    found = []
+    for q in Q:
+        for d in D:
+            if q == d:
+                found.append(q)
+    return len(found)
+
 def get_db_queries(num_database, num_queries, max_value=None, V=None):
     D = None
     Q = None
@@ -308,13 +316,8 @@ def main():
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
-
-
-
     fig.tight_layout()
     fig.savefig(args.out_file)
-
-
     
 if __name__ == '__main__':
     main()

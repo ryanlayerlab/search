@@ -29,9 +29,9 @@ def get_args():
     return parser.parse_args()
 
 def binary_search_rt(q, d):
-    return d*math.log(q) + q*math.log(d)
+    return d*math.log(d) + q*math.log(d)
 def merge_search_rt(q, d):
-    return d*math.log(q) + q*math.log(q) + q + d
+    return d*math.log(d) + q*math.log(q) + q + d
 
 def main():
     args = get_args()
